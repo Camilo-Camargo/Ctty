@@ -1,0 +1,99 @@
+#ifndef __CSI__H_ 
+#define __CSI__H_ 
+
+//CSI (Control Sequence Introducer)   
+//CSI Parameter bytes Intermediate bytes Final byte 
+
+#define CSI "\e["
+#define CSI_CURSOR_UP(n) (CSI #n "A")
+#define CSI_CURSOR_DOWN(n) (CSI #n "B")
+#define CSI_CURSOR_FORWARD(n) (CSI #n "C")
+#define CSI_CURSOR_BACK(n)	 (CSI #n "D") 
+#define CSI_CURSOR_NEXT_LINE(n) (CSI #n "E")
+#define CSI_CURSOR_PREVIOUS_LINE(n) (CSI #n "F")
+#define CSI_CURSOR_HORIZONTAL_ABSOLUTE(n) (CSI #n "G")
+#define CSI_CURSOR_POSITION(n, m) (CSI #n ";" #m "H") 
+
+/*
+ * CLEAR THE SCREEN
+ * n=0: cursor to end of screen.
+ * n=1: cursor to beginning of the screen 
+ * n=2: entire screen 
+ * n=3: entire screen, delete scroll-back buffer 
+ */ 
+
+#define CSI_ERASE_IN_DISPLAY(n) (CSI #n "J")
+
+
+/* 
+ * CLEAR IN LINE 
+ * n=0: from cursor to the end of the line
+ * n=1: from cursor to the beginning of the line  
+ * n=2: entire line
+ */
+#define CSI_ERASE_IN_LINE(n) (CSI #n "K")
+
+#define CSI_SCROLL_UP(n) (CSI #n "S") 
+#define CSI_SCROLL_DOWN(n) (CSI #n "T")
+#define CSI_HORIZONTAL_VERTICAL_POSTITION(n, m) (CSI #n ";" #m "f")
+#define CSI_SELECT_GRAPHIC_RENDITION(n) (CSI #n "m")
+#define CSI_AUX_PORT_ON() (CSI "5i")
+#define CSI_AUX_PORT_OFF() (CSI "4i") 
+#define CSI_DEVICE_STATUS_REPORT() (CSI "6n") 
+#define CSI_SAVE_CURRENT_CURSOR_POSITION() (CSI "s")
+#define CSI_RESTORE_SAVED_CURSOR_POSITION() (CSI "u") 
+#define CSI_SHOW_CURSOR() (CSI "?25h")
+#define CSI_HIDE_CURSOR() (CSI "?25l") 
+
+
+/* SGR (SELECT GRAPHIC RENDITION) */  
+#define SGR_RESET() (CSI_SELECT_GRAPHIC_RENDITION(0))
+#define SGR_BOLD() (CSI_SELECT_GRAPHIC_RENDITION(1))
+#define SGR_FAINT() (CSI_SELECT_GRAPHIC_RENDITION(2))
+#define SGR_ITALIC() (CSI_SELECT_GRAPHIC_RENDITION(3))
+#define SGR_UNDERLINE() (CSI_SELECT_GRAPHIC_RENDITION(4))
+#define SGR_SLOW_BLINK() (CSI_SELECT_GRAPHIC_RENDITION(5))
+#define SGR_RAPID_BLINK() (CSI_SELECT_GRAPHIC_RENDITION(6))
+#define SGR_REVERSE_VIDEO() (CSI_SELECT_GRAPHIC_RENDITION(7))
+#define SGR_CONCEAL() (CSI_SELECT_GRAPHIC_RENDITION(8))
+#define SGR_STRIKE() (CSI_SELECT_GRAPHIC_RENDITION(9))
+#define SGR_PRIMARY() (CSI_SELECT_GRAPHIC_RENDITION(10))
+#define SGR_ALTERNATIVE_FONT(n) (CSI_SELECT_GRAPHIC_RENDITION(n)) // 11-19
+#define SGR_FRAKTUR() (CSI_SELECT_GRAPHIC_RENDITION(20))
+#define SGR_DOUBLY_UNDERLINED() (CSI_SELECT_GRAPHIC_RENDITION(21))
+#define SGR_NORMAL_INTENSITY() (CSI_SELECT_GRAPHIC_RENDITION(22))
+#define SGR_NOT_ITALIC_OR_BLACKLETTER() (CSI_SELECT_GRAPHIC_RENDITION(23))
+#define SGR_NOT_UNDERLINE() (CSI_SELECT_GRAPHIC_RENDITION(24))
+#define SGR_NOT_BLINKING() (CSI_SELECT_GRAPHIC_RENDITION(25))
+#define SGR_PROPORTIONAL_SPACING() (CSI_SELECT_GRAPHIC_RENDITION(26))
+#define SGR_NOT_REVERSED() (CSI_SELECT_GRAPHIC_RENDITION(27))
+#define SGR_REVEAL() (CSI_SELECT_GRAPHIC_RENDITION(28))
+#define SGR_NOT_STRIKE() (CSI_SELECT_GRAPHIC_RENDITION(29))
+#define SGR_SET_FOREGROUND(n) (CSI_SELECT_GRAPHIC_RENDITION(n)) // 30-37
+#define SGR_DEFAULT_FOREGROUND() (CSI_SELECT_GRAPHIC_RENDITION(38))
+#define SGR_SET_BACKGROUND(n) (CSI_SELECT_GRAPHIC_RENDITION(n)) // 40-47
+#define SGR_DEFAULT_BACKGROUND() (CSI_SELECT_GRAPHIC_RENDITION(49))
+
+
+/* SGR COLORS */ 
+/* Foreground */
+#define SGR_FG_BLACK 30
+#define SGR_FG_RED 31
+#define SGR_FG_GREEN 32
+#define SGR_FG_YELLOW 33
+#define SGR_FG_BLUE 34
+#define SGR_FG_MAGENTA 35
+#define SGR_FG_CYAN 36
+#define SGR_FG_WHITE 37
+
+/* Background */
+#define SGR_BG_BLACK 40
+#define SGR_BG_RED 41
+#define SGR_BG_GREEN 42
+#define SGR_BG_YELLOW 43
+#define SGR_BG_BLUE 44
+#define SGR_BG_MAGENTA 45
+#define SGR_BG_CYAN 46
+#define SGR_BG_WHITE 47
+
+#endif
